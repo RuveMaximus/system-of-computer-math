@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор векторов</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <div class="vector" id="v1">
+        <span>v1 = </span>
+        <button onclick="addPoint(this)">+</button>
+        <div class="points-list">
+            <input type="number" value="0">
+        </div>
+        <button onclick="deletePoint(this)">-</button>
+    </div>
+    <div class="vector" id="v2">
+        <span>v2 = </span>
+        <button onclick="addPoint(this)">+</button>
+        <div class="points-list">
+            <input type="number" value="0">
+        </div>
+        <button onclick="deletePoint(this)">-</button>
+    </div>
+    <p>Операция:</p> 
+    <select id="func">
+        <option value="plus">Сложить</option>
+        <option value="minus">Вычесть</option>
+        <option value="multi">Умножить</option>
+        <option value="dev">Разделить</option>
+        <option value="coliniar">Колиниарны (да, нет)</option>
+    </select>
+    <button onclick="calc()">Вычислить</button>
+    <p>Результат вычислений: <span id="result">{{ result }}</span></p>
+    <script type="text/javascript" src='/static/script.js' ></script>
+</body>
+</html>
