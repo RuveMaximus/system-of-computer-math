@@ -33,7 +33,7 @@ def is_coliniar(v1: list[float], v2: list[float]) -> bool:
 
 @same_dimension_required
 def is_codirected(v1: list[float], v2: list[float]) -> bool:
-    return is_coliniar(v1, v2) and multi(v1, v2) > 0
+    return is_coliniar(v1, v2) and v1[0]/v2[0] > 0
 
 @same_dimension_required
 def is_not_codirected(v1: list[float], v2: list[float]) -> bool:

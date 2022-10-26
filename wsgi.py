@@ -16,7 +16,7 @@ def calc():
         "minus": vector.minus,
         "multi": vector.multi,
         "multi_scalar": vector.multi_scalar,
-        "dev": vector.dev_scalar,
+        "dev_scalar": vector.dev_scalar,
         "is_coliniar": vector.is_coliniar,
         "is_codirected": vector.is_codirected,
         "is_not_codirected": vector.is_not_codirected,
@@ -35,12 +35,12 @@ def calc():
     v2 = list(map(float, request.args.get("v2").split(';')))
 
     if "scalar" in func: 
-        v2 = v2[0]
+        v2 = float(request.args.get("v2").split(';')[0])
 
     try:
         return str(functions.get(func)(v1, v2)) if functions.get(func) else 'Неизвестная операция'
 
     except Exception as e:
         print(e)
-        return 'Что-то очень плохое случилось на сервере, но фиксики уже выехали'
+        return 'Сервер лег, но бригада фиксиков уже выехала!'
 
