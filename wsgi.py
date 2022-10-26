@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template
 from vectors import vector
 
 app = Flask(__name__)
@@ -11,36 +11,36 @@ def main():
 
 @app.route("/calc/")
 def calc():
+    functions = {
+        "plus": vector.plus,
+        "minus": vector.minus,
+        "multi": vector.multi,
+        "multi_scalar": vector.multi_scalar,
+        "dev": vector.dev_scalar,
+        "is_coliniar": vector.is_coliniar,
+        "is_codirected": vector.is_codirected,
+        "is_not_codirected": vector.is_not_codirected,
+        "is_equal": vector.is_equal,
+        "is_orthogonal": vector.is_orthogonal,
+        "length": vector.length,
+        "ration": vector.ration,
+        "reverse": vector.reverse,
+        "angle": vector.angle,
+        "cos": vector.cos,
+    }
+    
     func = str(request.args.get("func"))
 
     v1 = list(map(float, request.args.get("v1").split(';')))
     v2 = list(map(float, request.args.get("v2").split(';')))
 
+    if "scalar" in func: 
+        v2 = v2[0]
+
     try:
-        result = []
-        if func == 'plus':
-            result = vector.plus(v1, v2)
-
-        elif func == 'minus':
-            result = vector.minus(v1, v2)
-
-        elif func == 'multi':
-            result = vector.multi(v1, v2)
-        
-        elif func == 'multi_scalar':
-            result = vector.multi_scalar(v1, v2[0])
-
-        elif func == 'dev_scalar':
-            result = vector.dev_scalar(v1, v2[0])
-
-        elif func == 'coliniar':
-            result = vector.coliniar(v1, v2)
-
-        else: 
-            return "Неизвестная операция!"
-
-        return str(result)
+        return str(functions.get(func)(v1, v2)) if functions.get(func) else 'Неизвестная операция'
 
     except Exception as e:
-        return str(e)
+        print(e)
+        return 'Что-то очень плохое случилось на сервере, но фиксики уже выехали'
 
