@@ -5,7 +5,7 @@ from math import acos
 @same_dimension_required
 def plus(v1: list[float], v2: list[float]) -> list[float]: 
     """Сумма векторов"""
-    return [point + v2[i] for i, point in enumerate(v1)]
+    return [v1[i] + v2[i] for i in range(len(v1))]
 
 @same_dimension_required
 def minus(v1: list[float], v2: list[float]) -> list[float]:
@@ -18,9 +18,11 @@ def multi(v1: list[float], v2: list[float]) -> list[float]:
     return list(map(lambda p1, p2: p1 * p2, v1, v2))
 
 def multi_scalar(v1: list[float], k: float) -> list[float]:
+    """Произведение вектора на скаляр"""
     return list(map(lambda point: point*k, v1))
 
 def dev_scalar(v1: list[float], k: float) -> list[float]:
+    """Деление вектора на скаляр"""
     return list(map(lambda point: point/k, v1))
 
 @same_dimension_required
@@ -33,6 +35,7 @@ def is_coliniar(v1: list[float], v2: list[float]) -> bool:
 
 @same_dimension_required
 def is_codirected(v1: list[float], v2: list[float]) -> bool:
+    """Проверка сонаправленности векторов"""
     return is_coliniar(v1, v2) and v1[0]/v2[0] > 0
 
 @same_dimension_required
@@ -41,15 +44,17 @@ def is_not_codirected(v1: list[float], v2: list[float]) -> bool:
 
 @same_dimension_required
 def is_equal(v1: list[float], v2: list[float]) -> bool:
+    """Проверка равенства векторов"""
     return is_codirected(v1, v2) and length(v1) == length(v2)
 
 @same_dimension_required
 def is_orthogonal(v1: list[float], v2: list[float]) -> bool:
+    """Проверка ортогональности векторов"""
     return cos(v1, v2) == 0
 
 @same_dimension_required
 def cos(v1: list[float], v2: list[float]) -> float:
-    return (multi(v1, v2))/(length(v1) * length(v2))
+    return sum(multi(v1, v2))/(length(v1) * length(v2))
 
 @same_dimension_required
 def angle(v1: list[float], v2: list[float]) -> float:
