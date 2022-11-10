@@ -9,7 +9,7 @@ def main():
     return render_template('index.html', result="")
 
 
-@app.route("/calc/")
+@app.route("/calc/vector/")
 def calc():
     functions = {
         "plus": vector.plus,
@@ -36,10 +36,8 @@ def calc():
 
     if "scalar" in func: 
         v2 = float(request.args.get("v2").split(';')[0])
-
     try:
         return str(functions.get(func)(v1, v2)) if functions.get(func) else 'Неизвестная операция'
-
     except Exception as e:
         print(e)
         return 'Сервер лег, но бригада фиксиков уже выехала!'
