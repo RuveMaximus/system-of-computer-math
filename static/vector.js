@@ -34,7 +34,7 @@ function calc() {
     let v1_str_points = v1.join(';');
     let v2_str_points = v2.join(';');
 
-    let url = `/calc/vector?func=${func}&v1=${v1_str_points}&v2=${v2_str_points}`; 
+    let url = `/vector/calc/?func=${func}&v1=${v1_str_points}&v2=${v2_str_points}`; 
 
     fetch(url).then(response => response.text()).then(result => showResult(result));
 }

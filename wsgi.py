@@ -8,9 +8,18 @@ app = Flask(__name__)
 def main():
     return render_template('index.html', result="")
 
+@app.route("/vector/")
+def vector_template():
+    return render_template('vector.html', result="")
 
-@app.route("/calc/vector/")
-def calc():
+
+@app.route("/matrix/")
+def matrix_template():
+    return render_template('matrix.html', result="")
+
+
+@app.route("/vector/calc/")
+def calc_vector():
     functions = {
         "plus": vector.plus,
         "minus": vector.minus,
@@ -41,4 +50,9 @@ def calc():
     except Exception as e:
         print(e)
         return 'Сервер лег, но бригада фиксиков уже выехала!'
+
+
+@app.route('/matrix/calc/')
+def calc_matrix():
+    return 'Сигнал получен'
 
