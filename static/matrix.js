@@ -1,14 +1,13 @@
 const matrixSize = document.getElementById('matrixSize');
-const matrixField = document.getElementById('matrixField');
+const firstMatrixField = document.getElementById('firstMatrixField');
+const secondMatrixField = document.getElementById('secondMatrixField');
 
-buildMatrixField(matrixSize.value); 
+refresh();
 
-matrixSize.addEventListener('change', function() {
+matrixSize.addEventListener('change', refresh);
+
+function buildMatrixField(size, matrixField) {
     matrixField.innerHTML = "";
-    buildMatrixField(matrixSize.value);    
-});
-
-function buildMatrixField(size) {
     for (let i=0; i < size; i++) {
         for (let j=0; j < size; j++) {
             let elem = document.createElement('input');
@@ -18,4 +17,15 @@ function buildMatrixField(size) {
         }
         matrixField.innerHTML += "</br>";
     }   
+}
+
+async function send() {
+    const func = document.getElementById('function').value;
+    console.log(await request(`/matrix/calc?func=${func}`))
+}
+send()
+
+function refresh() {
+    buildMatrixField(matrixSize.value, firstMatrixField); 
+    buildMatrixField(matrixSize.value, secondMatrixField); 
 }

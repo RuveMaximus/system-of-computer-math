@@ -4,12 +4,20 @@
 
 {% block content %}
     <h1>Вычисление матриц</h1>
-    <select id="matrixSize">
-        <option value="1">1x1</option>
-        <option value="2">2x2</option>
-        <option value="3">3x3</option>
-        <option value="4">4x4</option>
-    </select>
-    <div id="matrixField"></div>
+    <div class="inputs-wrapper">
+        <select id="matrixSize">
+            <option value="1">1x1</option>
+            <option value="2">2x2</option>
+            <option value="3">3x3</option>
+            <option value="4">4x4</option>
+        </select>
+        <select id="function">
+            <option value="sum">Сумма</option>
+        </select>
+    </div>
+    <div class="matrices">
+        <div id="firstMatrixField" class="matrix"></div>
+        <div id="secondMatrixField" class="matrix"></div>
+    </div>
     <script src="/static/matrix.js"></script>
 {% endblock %}

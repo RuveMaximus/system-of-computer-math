@@ -1,5 +1,6 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, jsonify
 from vectors import vector
+from matrices import matrix
 
 app = Flask(__name__)
 
@@ -11,7 +12,6 @@ def main():
 @app.route("/vector/")
 def vector_template():
     return render_template('vector.html', result="")
-
 
 @app.route("/matrix/")
 def matrix_template():
@@ -47,6 +47,7 @@ def calc_vector():
         v2 = float(request.args.get("v2").split(';')[0])
     try:
         return str(functions.get(func)(v1, v2)) if functions.get(func) else 'Неизвестная операция'
+
     except Exception as e:
         print(e)
         return 'Сервер лег, но бригада фиксиков уже выехала!'
@@ -54,5 +55,22 @@ def calc_vector():
 
 @app.route('/matrix/calc/')
 def calc_matrix():
-    return 'Сигнал получен'
+    functions = {
+        "sum": matrix.sum,
+    }
+    func = functions.get(str(request.args.get("func")))
+    m1 = [
+        [1,2,3],
+        [1,2,3],
+        [1,2,3],
+    ]
+    m2 = [
+        [1,2,3],
+        [1,2,3],
+        [1,2,3],
+    ]
 
+    return {
+        'status': 'ok', 
+        'result': func(m1, m2)
+    }
