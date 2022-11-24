@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, jsonify
 from vectors import vector
 from matrices import matrix
+import functions
 
 app = Flask(__name__)
 
@@ -17,6 +18,14 @@ def vector_template():
 def matrix_template():
     return render_template('matrix.html', result="")
 
+@app.route('/functions/', methods=['POST'])
+def send_functions():
+    request_data = request.get_json()
+
+    return jsonify({
+        'status': 'ok',
+        'functions': functions.functions.get(request_data['type'])
+    })
 
 @app.route("/vector/calc/")
 def calc_vector():
@@ -53,24 +62,19 @@ def calc_vector():
         return 'Сервер лег, но бригада фиксиков уже выехала!'
 
 
-@app.route('/matrix/calc/')
+@app.route('/matrix/calc/', methods=['POST'])
 def calc_matrix():
     functions = {
-        "sum": matrix.sum,
+        'sum': matrix.summ,
+        'dif': matrix.dif,
     }
-    func = functions.get(str(request.args.get("func")))
-    m1 = [
-        [1,2,3],
-        [1,2,3],
-        [1,2,3],
-    ]
-    m2 = [
-        [1,2,3],
-        [1,2,3],
-        [1,2,3],
-    ]
+    request_data = request.get_json()
 
-    return {
+    func = functions.get(request_data['func'])
+    m1 = request_data['first_matrix']
+    m2 = request_data['second_matrix']
+
+    return jsonify({
         'status': 'ok', 
         'result': func(m1, m2)
-    }
+    })
