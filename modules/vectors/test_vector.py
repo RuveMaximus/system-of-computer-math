@@ -1,6 +1,6 @@
 from random import randint, random
 from math import pi
-from vectors import vector
+from . import vector
 
 def get_vector(*args, rand_func: callable, size=None):
     """генерация вектора"""

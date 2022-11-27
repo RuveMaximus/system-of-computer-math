@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, jsonify
-from vectors import vector
-from matrices import matrix
+from modules.vectors import vector
+from modules.matrices import matrix
 import functions
 
 app = Flask(__name__)

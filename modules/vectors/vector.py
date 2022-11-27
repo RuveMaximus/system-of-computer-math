@@ -17,13 +17,13 @@ def multi(v1: list[float], v2: list[float]) -> list[float]:
     """Скалярное произведение векторов"""
     return list(map(lambda p1, p2: p1 * p2, v1, v2))
 
-def multi_scalar(v1: list[float], k: float) -> list[float]:
+def multi_scalar(vector: list[float], scalar: float) -> list[float]:
     """Произведение вектора на скаляр"""
-    return list(map(lambda point: point*k, v1))
+    return list(map(lambda point: point*scalar, vector))
 
-def dev_scalar(v1: list[float], k: float) -> list[float]:
+def dev_scalar(vector: list[float], scalar: float) -> list[float]:
     """Деление вектора на скаляр"""
-    return list(map(lambda point: point/k, v1))
+    return list(map(lambda point: point/scalar, vector))
 
 @same_dimension_required
 def is_coliniar(v1: list[float], v2: list[float]) -> bool:

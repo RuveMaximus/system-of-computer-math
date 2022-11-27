@@ -45,3 +45,7 @@ def test_swap_rows():
 def test_multiply_row_by_scalar(): 
     assert matrix.multiply_row_by_scalar([[1, 2, 3], [4, 5, 6]], 0, 3) == [[3, 6, 9], [4, 5, 6]]
 
+def test_(): 
+    assert matrix.sum_matrix_rows(
+        [[3, 3, 3], [1, 2, 3], [1, 1, 1]], [0, 2], [1, -3]
+    ) == [[0, 0, 0], [1, 2, 3], [1, 1, 1]]
