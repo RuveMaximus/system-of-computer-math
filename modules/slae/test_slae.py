@@ -16,3 +16,4 @@ def test_is_solution():
 
 def test_solve():
     assert slae.solve([[2, 3], [4, 3]], [2, 7]) == [2.5, -1.0]
+    assert slae.solve([[-1, 2, 6], [3, -6, 0], [1, 0, 6]], [15, -9, 5]) == [-7, -2, 2]

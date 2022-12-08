@@ -6,8 +6,6 @@ def count_row_position(row: list):
     return pos 
 
 def refresh_matrix(m: list):
-
-
     _matrix = [None]*len(m)
     for row in m:
         pos = count_row_position(row)
@@ -32,10 +30,38 @@ def add_column(m: list, col_to_add: list):
     return m
 
 
+def left_complete(m):
+    for i in range(len(m)):
+        for j in range(i):
+            if m[i][j] != 0:
+                return False
+    return True
+
+def right_complete(m):
+    for i in range(len(m)):
+        for j in range(i+1, len(m)):
+            if m[i][j] != 0:
+                return False
+    return True
+
+
 def solve(m: list, result_column: list):
     m = add_column(m, result_column)
 
-    print(m)
+    while not left_complete(m):
+        for i in range(len(m)):
+            if m[i][i] == 0: m = refresh_matrix(m)
+            m = matrix.dif_row_by_scalar(m, i, m[i][i])
+            for j in range(i):
+                m = matrix.sum_matrix_rows(m, [i, j], [-1, m[i][j]])
 
+    while not right_complete(m):
+        for i in range(len(m)):
+            if m[i][i] == 0: m = refresh_matrix(m)
+            m = matrix.dif_row_by_scalar(m, i, m[i][i])
+            for j in range(i+1, len(m)):
+                m = matrix.sum_matrix_rows(m, [i, j], [1, -m[i][j]])
 
-    return [row[-1] for row in m]
+    print(m, is_solution(m))
+
+    return [round(row[-1], 2) for row in m]
