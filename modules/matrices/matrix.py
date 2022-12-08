@@ -17,6 +17,9 @@ def multiply(m1, m2):
 def scalar_multiply(matrix, scalar): 
     return [vector.multi_scalar(row, scalar) for row in matrix]
 
+def scalar_dif(matrix, scalar): 
+    return [vector.dev_scalar(row, scalar) for row in matrix]
+
 def get_row(matrix, index: int): 
     return matrix[index]
 
@@ -34,11 +37,19 @@ def swap_rows(m, indexes: list):
             a[index] = m[index] 
     return a
 
-def multiply_row_by_scalar(matrix, index: int, scalar: float): 
+def multiply_row_by_scalar(matrix: list, index: int, scalar: float): 
     matrix[index] = vector.multi_scalar(get_row(matrix, index), scalar)
     return matrix
 
+def dif_row_by_scalar(matrix: list, index: int, scalar: float):
+    matrix[index] = vector.dev_scalar(get_row(matrix, index), scalar)
+    return matrix
+
 def sum_matrix_rows(m, row_idxs: list, scalars: list): 
+    """
+    :param row_idxs: Список индексов строк для сложения
+    :param scalars: Список чисел, на каторые будут домножены строки (первый элемент соответствует первому элементу из row_idxs)
+    """
     m[row_idxs[0]] = vector.plus(
         vector.multi_scalar(m[row_idxs[0]], scalars[0]),
         vector.multi_scalar(m[row_idxs[1]], scalars[1])

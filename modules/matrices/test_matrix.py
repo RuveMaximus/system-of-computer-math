@@ -33,6 +33,11 @@ def test_scalar_multiply():
         [[1, 2, 3], [4, 5, 6]], 2
     ) == [[2, 4, 6], [8, 10, 12]]
 
+def test_scalar_dif():
+    assert matrix.scalar_dif(
+        [[2, 4, 6], [8, 10, 12]], 2
+    ) == [[1, 2, 3], [4, 5, 6]]
+
 def test_get_row():
     assert matrix.get_row([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 1) == [4, 5, 6]
 
@@ -45,7 +50,10 @@ def test_swap_rows():
 def test_multiply_row_by_scalar(): 
     assert matrix.multiply_row_by_scalar([[1, 2, 3], [4, 5, 6]], 0, 3) == [[3, 6, 9], [4, 5, 6]]
 
-def test_(): 
+def test_dif_row_by_scalar(): 
+    assert matrix.dif_row_by_scalar([[3, 6, 9], [4, 5, 6]], 0, 3) == [[1, 2, 3], [4, 5, 6]]
+
+def test_sum_matrix_rows(): 
     assert matrix.sum_matrix_rows(
         [[3, 3, 3], [1, 2, 3], [1, 1, 1]], [0, 2], [1, -3]
     ) == [[0, 0, 0], [1, 2, 3], [1, 1, 1]]
