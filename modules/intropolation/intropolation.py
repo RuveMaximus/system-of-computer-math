@@ -2,7 +2,7 @@ from modules.slae import slae
 from math import prod
 from modules import decorators
 
-@decorators.copy_need
+@decorators.args_copy_need
 def split_matrix_with_replace(matrix):
     result_column = []
     for row in matrix:

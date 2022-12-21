@@ -1,5 +1,5 @@
 from modules.matrices import matrix
-
+from modules.decorators import args_copy_need
 
 def count_row_position(row: list):
     pos = 0
@@ -78,13 +78,14 @@ def inverse_matrix(m):
     return m
 
 
+@args_copy_need
 def solve(m: list, result_column: list):
     m = add_column(m, result_column)
     m = inverse_matrix(m)
 
     return [round(row[-1], 2) for row in m]
 
-
+@args_copy_need
 def solve_by_inverse_matrix(m: list, result_column: list):
     m = attach_unit_matrix(m)
     m = inverse_matrix(m)
