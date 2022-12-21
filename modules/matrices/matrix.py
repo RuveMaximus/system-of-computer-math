@@ -1,5 +1,5 @@
 from modules.vectors import vector
-
+from modules.decorators import args_copy_need
 
 def summ(m1, m2):
     return [vector.plus(m1[i], m2[i]) for i in range(len(m1))]
@@ -55,3 +55,21 @@ def sum_matrix_rows(m, row_idxs: list, scalars: list):
         vector.multi_scalar(m[row_idxs[1]], scalars[1])
     )
     return m
+
+def get_unit_matrix(size: int):
+    m = []
+    for i in range(size): 
+        row = []
+        for j in range(i): row.append(0)
+        row.append(1)
+        for j in range(size-i-1): row.append(0)
+        m.append(row)
+    return m
+
+
+@args_copy_need
+def attach_matrix(base_matrix: list, matrix_to_add: list):
+    for i in range(len(base_matrix)):
+        base_matrix[i].extend(matrix_to_add[i])
+
+    return base_matrix

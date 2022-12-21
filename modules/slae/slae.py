@@ -50,14 +50,7 @@ def right_complete(m):
     
 
 def attach_unit_matrix(m):
-    for i in range(len(m)):
-        row = []
-        for j in range(i): row.append(0)
-        row.append(1)
-        for j in range(len(m)-i-1): row.append(0)
-        m = add_column(m, row)
-    
-    return m
+    return matrix.attach_matrix(m, matrix.get_unit_matrix(len(m)))
 
 
 def inverse_matrix(m):
