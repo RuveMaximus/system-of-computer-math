@@ -1,20 +1,18 @@
 from modules.slae import slae
-from copy import deepcopy
 from math import prod
+from modules import decorators
 
-
+@decorators.copy_need
 def split_matrix_with_replace(matrix):
-    matrix = deepcopy(matrix)
     result_column = []
-    for i in range(len(matrix)):
-        result_column += [matrix[i][-1]]
-        matrix[i][-1] = 1
+    for row in matrix:
+        result_column.append(row[-1])
+        row[-1] = 1
     return matrix, result_column
 
 
 def get_line_equation(matrix):
-    matrix, result_column = split_matrix_with_replace(matrix)
-    return slae.solve_by_inverse_matrix(matrix, result_column)
+    return slae.solve_by_inverse_matrix( *split_matrix_with_replace(matrix) )
 
 
 def linear_interpolation(matrix):
